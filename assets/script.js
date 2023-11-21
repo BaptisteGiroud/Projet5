@@ -27,13 +27,23 @@ let imgCarousel = slides[i]["image"]
 let tagCarousel = slides[i]["tagLine"]
 let sourceImg = "./assets/images/slideshow/" + imgCarousel
 
-
 // HTML cible //
 
 let leftArrow = document.querySelector(".arrow_left")
 let rightArrow = document.querySelector(".arrow_right")
 let slidePicture = document.querySelector(".banner-img")
 let slideTag = document.querySelector("#banner p")
+let load = document.querySelector("body")
+
+// Dots //
+
+for (let i = 0; i < slides.length; i++){
+	let dotsCarousel = document.querySelector(".dots")
+	dotsCarousel.insertAdjacentHTML("afterbegin", `<div class="dot"></div>`)
+}
+
+let whichDot = document.querySelectorAll(".dots .dot")
+whichDot[0].classList.add("dot_selected")
 
 // Buttons //
 
@@ -55,13 +65,6 @@ let switchright = rightArrow.addEventListener("click", () => {
 	selectCurrentDot(i, whichDot)
 })
 
-// Dots //
-
-for (i = 0; i < slides.length; i++){
-	let dotsCarousel = document.querySelector(".dots")
-	dotsCarousel.insertAdjacentHTML("afterbegin", `<div class="dot"></div>`)
-}
-
 // Functions //
 
 function switchSlide(){
@@ -73,10 +76,11 @@ function switchSlide(){
 	console.log(i)
 }
 
-
-let whichDot = document.querySelectorAll(".dots .dot")
-
 function selectCurrentDot(i, whichDot){
+	for (dot = 0; dot < slides.length; dot++){
+		if (whichDot[dot].classList.contains("dot_selected")){
+			whichDot[dot].classList.remove("dot_selected")
+		}
+	}
 	whichDot[i].classList.add("dot_selected")
 }
-
